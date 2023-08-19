@@ -7,12 +7,28 @@ import "primeicons/primeicons.css";
 import DataTable from "primevue/datatable";
 import Card from "primevue/card";
 import Column from "primevue/column";
+import Button from "primevue/button";
+import Dialog from "primevue/dialog";
+import DialogService from "primevue/dialogservice";
+import DynamicDialog from "primevue/dynamicdialog";
+import InputNumber from "primevue/inputnumber";
+import InputText from "primevue/inputtext";
 
 export default {
   install: (app: any) => {
     app.use(PrimeVue);
+    app.use(DialogService);
 
-    const components = { DataTable, Card, Column };
+    const components = {
+      DataTable,
+      Card,
+      Column,
+      Button,
+      Dialog,
+      DynamicDialog,
+      InputNumber,
+      InputText
+    };
 
     Object.entries(components).forEach(([name, component]) => {
       app.component(name, component);

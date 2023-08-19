@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import OrderTable from "./components/OrderTable.vue";
+import OrderTable from "@/components/order/OrderTable.vue";
 </script>
 
 <template>
