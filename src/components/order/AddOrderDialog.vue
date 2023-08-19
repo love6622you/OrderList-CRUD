@@ -16,20 +16,20 @@ import { addOrder } from "@/service/OrderService";
 import OrderForm from "./OrderForm.vue";
 import { TOrder } from "@/model/order";
 
-defineProps<{ visible?: boolean }>();
+const props = defineProps<{ visible?: boolean }>();
 const emit = defineEmits(["updateList", "close"]);
 
 const close = () => {
   emit("close", false);
 };
 
-const onSubmit = async (data: TOrder) => {
-  await addOrder({
+const onSubmit = (data: TOrder) => {
+  addOrder({
     ...data,
     id: generateRandomId(),
     price: +data.price
-  }).then(async () => {
-    await emit("updateList");
+  }).then(() => {
+    emit("updateList");
     close();
   });
 };

@@ -13,9 +13,10 @@ export const addOrder = (data: TOrder) => {
     data
   });
 };
-export const editOrder = (id: string) => {
+export const editOrder = (id: string, data: TOrder) => {
   return axios(`http://localhost:3000/order/${id}`, {
-    method: "PUT"
+    method: "PUT",
+    data
   });
 };
 export const deleteOrder = (id: string) => {

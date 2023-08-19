@@ -2,36 +2,34 @@
   <Dialog
     :visible="visible"
     modal
-    header="Add Order"
+    header="Edit Order"
     :style="{ width: '40rem' }"
     @update:visible="close"
   >
-    <OrderForm @on-submit="onSubmit" />
+    <OrderForm :data="data" @on-submit="onSubmit" />
   </Dialog>
 </template>
 
 <script setup lang="ts">
-import { generateRandomId } from "@/utils/index";
-import { addOrder } from "@/service/OrderService";
+import { editOrder } from "@/service/OrderService";
 import OrderForm from "./OrderForm.vue";
 import { TOrder } from "@/model/order";
 
-defineProps<{ visible?: boolean }>();
+const props = defineProps<{ visible?: boolean; data: TOrder | null }>();
 const emit = defineEmits(["updateList", "close"]);
 
 const close = () => {
   emit("close", false);
 };
 
-const onSubmit = async (data: TOrder) => {
-  await addOrder({
-    ...data,
-    id: generateRandomId(),
-    price: +data.price
-  }).then(async () => {
-    await emit("updateList");
-    close();
-  });
+const onSubmit = (data: TOrder) => {
+  if (props.data) {
+    const { id } = props.data;
+    editOrder(id, data).then(() => {
+      emit("updateList");
+      close();
+    });
+  }
 };
 </script>
 

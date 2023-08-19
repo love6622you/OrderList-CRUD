@@ -12,41 +12,35 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { useForm } from "vee-validate";
+import { orderFormSchema } from "@/model/formSchema";
+import { TOrder } from "@/model/order";
 import { toTypedSchema } from "@vee-validate/zod";
-import * as zod from "zod";
 import Input from "@/components/formFiled/Input.vue";
 
+const props = defineProps<{ data?: TOrder | null }>();
 const emits = defineEmits(["onSubmit"]);
 
-const validationSchema = toTypedSchema(
-  zod.object({
-    name: zod
-      .string({
-        required_error: "品項名稱必填"
-      })
-      .nonempty({ message: "該欄位不能為空" }),
-    price: zod
-      .string({
-        required_error: "價格必填"
-      })
-      .nonempty({ message: "該欄位不能為空" }),
-    size: zod
-      .string({
-        required_error: "尺寸必填"
-      })
-      .nonempty({ message: "該欄位不能為空" }),
-    note: zod.string().optional()
-  })
-);
+const validationSchema = toTypedSchema(orderFormSchema);
 
-const { handleSubmit, isSubmitting } = useForm({
+const { handleSubmit, isSubmitting, setFieldValue } = useForm({
   validationSchema
 });
 
 const onSubmit = handleSubmit((values) => {
   if (isSubmitting) {
     emits("onSubmit", values);
+  }
+});
+
+onMounted(() => {
+  if (props.data) {
+    const { name, price, size, note } = props.data;
+    setFieldValue("name", name);
+    setFieldValue("price", String(price));
+    setFieldValue("size", size);
+    setFieldValue("note", note);
   }
 });
 </script>
