@@ -1,5 +1,7 @@
 <template>
-  <OrderTable />
+  <div>
+    <OrderTable />
+  </div>
 </template>
 
 <script setup lang="ts">

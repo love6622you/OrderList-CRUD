@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <DataTable :value="orderList" tableStyle="min-width: 50rem">
+  <div class="w-full md:w-[50rem] mx-auto">
+    <DataTable :value="orderList" scrollable>
       <template #header>
         <div class="flex items-center justify-between">
           <span>Order List</span>
@@ -8,31 +8,40 @@
         </div>
       </template>
 
-      <Column field="name" header="Name"></Column>
-      <Column field="price" header="Price"></Column>
-      <Column field="size" header="Size"></Column>
-      <Column field="note" header="Note"></Column>
+      <Column
+        field="name"
+        header="Name"
+        class="max-w-[200px] break-words"
+      />
+      <Column field="price" header="Price" class="min-w-[100px]" />
+      <Column field="size" header="Size" class="min-w-[50px]" />
+      <Column
+        field="note"
+        header="Note"
+        class="min-w-[200px] break-words"
+      />
       <Column header="Action">
         <template #body="slotProps">
-          <Button
-            class="mr-4"
-            icon="pi pi-pencil"
-            outlined
-            rounded
-            @click="
-              () => {
-                currentData = slotProps.data;
-                setDialog(true, 'edit');
-              }
-            "
-          />
-          <Button
-            icon="pi pi-trash"
-            outlined
-            rounded
-            severity="danger"
-            @click="deleteOrderItem(slotProps.data.id)"
-          />
+          <div class="flex gap-4">
+            <Button
+              icon="pi pi-pencil"
+              outlined
+              rounded
+              @click="
+                () => {
+                  currentData = slotProps.data;
+                  setDialog(true, 'edit');
+                }
+              "
+            />
+            <Button
+              icon="pi pi-trash"
+              outlined
+              rounded
+              severity="danger"
+              @click="deleteOrderItem(slotProps.data.id)"
+            />
+          </div>
         </template>
       </Column>
     </DataTable>

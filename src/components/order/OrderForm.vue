@@ -9,8 +9,6 @@
       <Button type="submit">Submit</Button>
     </div>
   </form>
-
-  {{ values }}
 </template>
 
 <script setup lang="ts">
