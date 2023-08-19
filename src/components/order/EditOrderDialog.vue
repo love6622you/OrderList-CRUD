@@ -11,11 +11,21 @@
 </template>
 
 <script setup lang="ts">
+import { PropType } from "vue";
 import { editOrder } from "@/service/OrderService";
 import OrderForm from "./OrderForm.vue";
 import { TOrder } from "@/model/order";
 
-const props = defineProps<{ visible?: boolean; data: TOrder | null }>();
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: false
+  },
+  data: {
+    type: Object as PropType<TOrder | null>,
+    default: () => ({})
+  }
+});
 const emit = defineEmits(["updateList", "close"]);
 
 const close = () => {
@@ -25,7 +35,10 @@ const close = () => {
 const onSubmit = (data: TOrder) => {
   if (props.data) {
     const { id } = props.data;
-    editOrder(id, data).then(() => {
+    editOrder(id, {
+      ...data,
+      price: +data.price
+    }).then(() => {
       emit("updateList");
       close();
     });

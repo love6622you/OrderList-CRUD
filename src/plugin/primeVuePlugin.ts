@@ -13,6 +13,7 @@ import DialogService from "primevue/dialogservice";
 import DynamicDialog from "primevue/dynamicdialog";
 import InputNumber from "primevue/inputnumber";
 import InputText from "primevue/inputtext";
+import RadioButton from "primevue/radiobutton";
 
 export default {
   install: (app: any) => {
@@ -27,7 +28,8 @@ export default {
       Dialog,
       DynamicDialog,
       InputNumber,
-      InputText
+      InputText,
+      RadioButton
     };
 
     Object.entries(components).forEach(([name, component]) => {

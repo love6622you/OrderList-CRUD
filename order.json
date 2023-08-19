@@ -1,18 +1,18 @@
 {
   "order": [
     {
-      "id": "1",
       "name": "衣服 1",
       "price": 1000,
       "size": "M",
-      "note": ""
+      "note": "",
+      "id": "1"
     },
     {
-      "id": "2",
       "name": "衣服 2",
-      "price": 500,
+      "price": 50,
       "size": "S",
-      "note": "不堪"
+      "note": "不堪",
+      "id": "2"
     }
   ]
 }

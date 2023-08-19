@@ -16,7 +16,12 @@ import { addOrder } from "@/service/OrderService";
 import OrderForm from "./OrderForm.vue";
 import { TOrder } from "@/model/order";
 
-const props = defineProps<{ visible?: boolean }>();
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: false
+  }
+});
 const emit = defineEmits(["updateList", "close"]);
 
 const close = () => {
