@@ -5,7 +5,7 @@ export const orderFormSchema = z.object({
   price: z
     .string()
     .nonempty({ message: "價格必填" })
-    .regex(/^[0-9]*$/, "限制輸入輸字"),
+    .regex(/^[0-9]*$/, "僅輸入輸字"),
   size: z.string({
     required_error: "尺寸必填"
   }),

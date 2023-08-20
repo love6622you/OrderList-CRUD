@@ -1,51 +1,41 @@
 <template>
-  <div class="w-full md:w-[50rem] mx-auto">
-    <DataTable :value="orderList" scrollable>
-      <template #header>
-        <div class="flex items-center justify-between">
-          <span>Order List</span>
-          <Button @click="setDialog(true, 'add')">Add Order</Button>
+  <DataTable :value="orderList">
+    <template #header>
+      <div class="flex items-center justify-between">
+        <span>Order List</span>
+        <Button @click="setDialog(true, 'add')">Add Order</Button>
+      </div>
+    </template>
+
+    <Column field="name" header="Name" class="min-w-[200px] break-words" />
+    <Column field="price" header="Price" class="min-w-[100px]" />
+    <Column field="size" header="Size" class="min-w-[50px]"/>
+    <Column field="note" header="Note" class="min-w-[300px] break-words" />
+    <Column header="Action">
+      <template #body="slotProps">
+        <div class="flex gap-4">
+          <Button
+            icon="pi pi-pencil"
+            outlined
+            rounded
+            @click="
+              () => {
+                currentData = slotProps.data;
+                setDialog(true, 'edit');
+              }
+            "
+          />
+          <Button
+            icon="pi pi-trash"
+            outlined
+            rounded
+            severity="danger"
+            @click="deleteOrderItem(slotProps.data.id)"
+          />
         </div>
       </template>
-
-      <Column
-        field="name"
-        header="Name"
-        class="max-w-[200px] break-words"
-      />
-      <Column field="price" header="Price" class="min-w-[100px]" />
-      <Column field="size" header="Size" class="min-w-[50px]" />
-      <Column
-        field="note"
-        header="Note"
-        class="min-w-[200px] break-words"
-      />
-      <Column header="Action">
-        <template #body="slotProps">
-          <div class="flex gap-4">
-            <Button
-              icon="pi pi-pencil"
-              outlined
-              rounded
-              @click="
-                () => {
-                  currentData = slotProps.data;
-                  setDialog(true, 'edit');
-                }
-              "
-            />
-            <Button
-              icon="pi pi-trash"
-              outlined
-              rounded
-              severity="danger"
-              @click="deleteOrderItem(slotProps.data.id)"
-            />
-          </div>
-        </template>
-      </Column>
-    </DataTable>
-  </div>
+    </Column>
+  </DataTable>
 
   <template v-if="dialogInfo.isShow">
     <AddOrderDialog
