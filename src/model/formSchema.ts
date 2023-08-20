@@ -1,4 +1,5 @@
 import z from "zod";
+import { NOTE_MAX_LENGTH } from "@/constant/input";
 
 export const orderFormSchema = z.object({
   name: z.string().nonempty({ message: "品項名稱必填" }),
@@ -9,5 +10,8 @@ export const orderFormSchema = z.object({
   size: z.string({
     required_error: "尺寸必填"
   }),
-  note: z.string().optional()
+  note: z
+    .string()
+    .max(NOTE_MAX_LENGTH, `最大為 ${NOTE_MAX_LENGTH} 字元`)
+    .optional()
 });

@@ -4,6 +4,9 @@
     <Input name="price" label="價格" placeholder="請輸入價格" />
     <RadioGroup label="尺寸" :radioList="sizeGroups" />
     <Input name="note" label="備註" />
+    <p class="text-right text-gray-400">
+      {{ values.note?.length }} / {{ NOTE_MAX_LENGTH }}
+    </p>
 
     <div class="w-full text-center">
       <Button type="submit">送出</Button>
@@ -27,13 +30,14 @@ const sizeGroups = [
   }
 ];
 
-import { PropType, onMounted } from "vue";
+import { PropType, computed, onMounted } from "vue";
 import { useForm } from "vee-validate";
 import { orderFormSchema } from "@/model/formSchema";
 import { TOrder } from "@/model/order";
 import { toTypedSchema } from "@vee-validate/zod";
 import Input from "@/components/formFiled/Input.vue";
 import RadioGroup from "../formFiled/RadioGroup.vue";
+import { NOTE_MAX_LENGTH } from "@/constant/input";
 
 const props = defineProps({
   data: {
@@ -44,7 +48,6 @@ const props = defineProps({
 const emits = defineEmits(["onSubmit"]);
 
 const validationSchema = toTypedSchema(orderFormSchema);
-
 const { handleSubmit, isSubmitting, setFieldValue, values } = useForm({
   validationSchema
 });
