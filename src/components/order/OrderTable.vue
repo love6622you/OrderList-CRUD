@@ -2,16 +2,16 @@
   <DataTable :value="orderList">
     <template #header>
       <div class="flex items-center justify-between">
-        <span>Order List</span>
-        <Button @click="setDialog(true, 'add')">Add Order</Button>
+        <h2 class="text-lg sm:text-2xl">訂單列表</h2>
+        <Button @click="setDialog(true, 'add')">新增品項</Button>
       </div>
     </template>
 
-    <Column field="name" header="Name" class="min-w-[200px] break-words" />
-    <Column field="price" header="Price" class="min-w-[100px]" />
-    <Column field="size" header="Size" class="min-w-[50px]"/>
-    <Column field="note" header="Note" class="min-w-[300px] break-words" />
-    <Column header="Action">
+    <Column field="name" header="品項" class="min-w-[200px] break-words" />
+    <Column field="price" header="價格" class="min-w-[100px]" />
+    <Column field="size" header="尺寸" class="min-w-[100px]" />
+    <Column field="note" header="備註" class="min-w-[300px] break-words" />
+    <Column>
       <template #body="slotProps">
         <div class="flex gap-4">
           <Button

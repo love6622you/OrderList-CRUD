@@ -6,7 +6,7 @@
     <Input name="note" label="備註" />
 
     <div class="w-full text-center">
-      <Button type="submit">Submit</Button>
+      <Button type="submit">送出</Button>
     </div>
   </form>
 </template>

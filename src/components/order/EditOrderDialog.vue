@@ -2,7 +2,7 @@
   <Dialog
     :visible="visible"
     modal
-    header="Edit Order"
+    header="編輯品項"
     :style="{ width: '40rem' }"
     @update:visible="close"
   >
